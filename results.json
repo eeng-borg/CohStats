@@ -1,0 +1,1226 @@
+[
+    {
+        "mapname": "stadtschutt",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 10,
+            "hour": 19,
+            "minute": 5
+        },
+        "start_timestamp": 1739214314,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 45
+        },
+        "duration_timestamp": 2735
+    },
+    {
+        "mapname": "4p_schilberg_outskirts",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 10,
+            "hour": 18,
+            "minute": 13
+        },
+        "start_timestamp": 1739211204,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 44
+        },
+        "duration_timestamp": 2681
+    },
+    {
+        "mapname": "aod",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 9,
+            "hour": 14,
+            "minute": 9
+        },
+        "start_timestamp": 1739110146,
+        "gameduration": {
+            "hours": 1,
+            "minutes": 4
+        },
+        "duration_timestamp": 3840
+    },
+    {
+        "mapname": "4p_rails_and_metal",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 8,
+            "hour": 13,
+            "minute": 38
+        },
+        "start_timestamp": 1739021931,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 50
+        },
+        "duration_timestamp": 3055
+    },
+    {
+        "mapname": "nexus",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 8,
+            "hour": 8,
+            "minute": 47
+        },
+        "start_timestamp": 1739004455,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 10
+        },
+        "duration_timestamp": 654
+    },
+    {
+        "mapname": "nexus",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 8,
+            "hour": 8,
+            "minute": 32
+        },
+        "start_timestamp": 1739003529,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 10
+        },
+        "duration_timestamp": 628
+    },
+    {
+        "mapname": "crossroads",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 8,
+            "hour": 7,
+            "minute": 57
+        },
+        "start_timestamp": 1739001461,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 31
+        },
+        "duration_timestamp": 1888
+    },
+    {
+        "mapname": "8p_redball_express",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 7,
+            "hour": 19,
+            "minute": 27
+        },
+        "start_timestamp": 1738956457,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 31
+        },
+        "duration_timestamp": 1902
+    },
+    {
+        "mapname": "8p_la_gleize",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 7,
+            "hour": 18,
+            "minute": 48
+        },
+        "start_timestamp": 1738954122,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 34
+        },
+        "duration_timestamp": 2085
+    },
+    {
+        "mapname": "6p_rzhev_frontline",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 7,
+            "hour": 18,
+            "minute": 6
+        },
+        "start_timestamp": 1738951595,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 38
+        },
+        "duration_timestamp": 2339
+    },
+    {
+        "mapname": "4p_lisores_river",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 6,
+            "hour": 21,
+            "minute": 7
+        },
+        "start_timestamp": 1738876059,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 36
+        },
+        "duration_timestamp": 2170
+    },
+    {
+        "mapname": "2p_don_river_v2",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 6,
+            "hour": 20,
+            "minute": 57
+        },
+        "start_timestamp": 1738875423,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 7
+        },
+        "duration_timestamp": 459
+    },
+    {
+        "mapname": "4p_belgorod",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 6,
+            "hour": 20,
+            "minute": 7
+        },
+        "start_timestamp": 1738872470,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 44
+        },
+        "duration_timestamp": 2653
+    },
+    {
+        "mapname": "4p_elst_outskirts",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 6,
+            "hour": 19,
+            "minute": 4
+        },
+        "start_timestamp": 1738868683,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 53
+        },
+        "duration_timestamp": 3183
+    },
+    {
+        "mapname": "4_6_lemberg_fall",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 5,
+            "hour": 19,
+            "minute": 54
+        },
+        "start_timestamp": 1738785253,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 52
+        },
+        "duration_timestamp": 3179
+    },
+    {
+        "mapname": "6p_across_the_rhine",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 5,
+            "hour": 19,
+            "minute": 13
+        },
+        "start_timestamp": 1738782821,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 35
+        },
+        "duration_timestamp": 2105
+    },
+    {
+        "mapname": "6p_foy",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 3,
+            "hour": 20,
+            "minute": 38
+        },
+        "start_timestamp": 1738615138,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 36
+        },
+        "duration_timestamp": 2211
+    },
+    {
+        "mapname": "4p_coh2_okariver_frontline",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 3,
+            "hour": 20,
+            "minute": 3
+        },
+        "start_timestamp": 1738613003,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 28
+        },
+        "duration_timestamp": 1681
+    },
+    {
+        "mapname": "village assault",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 3,
+            "hour": 19,
+            "minute": 33
+        },
+        "start_timestamp": 1738611229,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 21
+        },
+        "duration_timestamp": 1309
+    },
+    {
+        "mapname": "6p_villers_bocage",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 3,
+            "hour": 19,
+            "minute": 6
+        },
+        "start_timestamp": 1738609597,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 22
+        },
+        "duration_timestamp": 1333
+    },
+    {
+        "mapname": "4p_einhoven_country",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 2,
+            "hour": 21,
+            "minute": 18
+        },
+        "start_timestamp": 1738531105,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 49
+        },
+        "duration_timestamp": 2983
+    },
+    {
+        "mapname": "4p_belgorod",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 1,
+            "hour": 20,
+            "minute": 35
+        },
+        "start_timestamp": 1738442136,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 33
+        },
+        "duration_timestamp": 2019
+    },
+    {
+        "mapname": "4p_belgorod",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 1,
+            "hour": 19,
+            "minute": 51
+        },
+        "start_timestamp": 1738439505,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 39
+        },
+        "duration_timestamp": 2356
+    },
+    {
+        "mapname": "4p_crossing_in_the_woods",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 2,
+            "day": 1,
+            "hour": 19,
+            "minute": 17
+        },
+        "start_timestamp": 1738437425,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 27
+        },
+        "duration_timestamp": 1638
+    },
+    {
+        "mapname": "4p_minsk_pocket_frontline",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 1,
+            "day": 31,
+            "hour": 20,
+            "minute": 22
+        },
+        "start_timestamp": 1738354960,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 33
+        },
+        "duration_timestamp": 1999
+    },
+    {
+        "mapname": "6p_across_the_rhine",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2025,
+            "month": 1,
+            "day": 31,
+            "hour": 19,
+            "minute": 9
+        },
+        "start_timestamp": 1738350559,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 55
+        },
+        "duration_timestamp": 3324
+    },
+    {
+        "mapname": "4p_einhoven_country",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 1,
+            "day": 29,
+            "hour": 17,
+            "minute": 57
+        },
+        "start_timestamp": 1738173465,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 39
+        },
+        "duration_timestamp": 2350
+    },
+    {
+        "mapname": "aod",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2025,
+            "month": 1,
+            "day": 29,
+            "hour": 17,
+            "minute": 22
+        },
+        "start_timestamp": 1738171320,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 32
+        },
+        "duration_timestamp": 1931
+    },
+    {
+        "mapname": "6p_hill_400",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 22,
+            "hour": 18,
+            "minute": 29
+        },
+        "start_timestamp": 1734892194,
+        "gameduration": {
+            "hours": 1,
+            "minutes": 8
+        },
+        "duration_timestamp": 4134
+    },
+    {
+        "mapname": "village assault",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 22,
+            "hour": 17,
+            "minute": 59
+        },
+        "start_timestamp": 1734890378,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 21
+        },
+        "duration_timestamp": 1274
+    },
+    {
+        "mapname": "atlantic_wall_pub",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 22,
+            "hour": 17,
+            "minute": 28
+        },
+        "start_timestamp": 1734888507,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 25
+        },
+        "duration_timestamp": 1512
+    },
+    {
+        "mapname": "6p_fields_of_winnekendonk",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 20,
+            "hour": 19,
+            "minute": 51
+        },
+        "start_timestamp": 1734724292,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 20
+        },
+        "duration_timestamp": 1228
+    },
+    {
+        "mapname": "6p_angermuende",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 20,
+            "hour": 19,
+            "minute": 15
+        },
+        "start_timestamp": 1734722107,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 31
+        },
+        "duration_timestamp": 1881
+    },
+    {
+        "mapname": "4p_teuforte_reborn",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 20,
+            "hour": 18,
+            "minute": 9
+        },
+        "start_timestamp": 1734718182,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 56
+        },
+        "duration_timestamp": 3372
+    },
+    {
+        "mapname": "4p_elst_outskirts",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 20,
+            "hour": 17,
+            "minute": 2
+        },
+        "start_timestamp": 1734714174,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 44
+        },
+        "duration_timestamp": 2679
+    },
+    {
+        "mapname": "8p_general_mud",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 19,
+            "hour": 17,
+            "minute": 39
+        },
+        "start_timestamp": 1734629945,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 25
+        },
+        "duration_timestamp": 1544
+    },
+    {
+        "mapname": "6p_angermuende",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 19,
+            "hour": 17,
+            "minute": 9
+        },
+        "start_timestamp": 1734628152,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 25
+        },
+        "duration_timestamp": 1552
+    },
+    {
+        "mapname": "6p_angermuende",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 17,
+            "hour": 17,
+            "minute": 7
+        },
+        "start_timestamp": 1734455232,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 38
+        },
+        "duration_timestamp": 2284
+    },
+    {
+        "mapname": "4p_crossing_in_the_woods",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 17,
+            "hour": 14,
+            "minute": 36
+        },
+        "start_timestamp": 1734446213,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 25
+        },
+        "duration_timestamp": 1551
+    },
+    {
+        "mapname": "8p_whiteball_express",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 15,
+            "hour": 19,
+            "minute": 46
+        },
+        "start_timestamp": 1734292004,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 9
+        },
+        "duration_timestamp": 554
+    },
+    {
+        "mapname": "6p_hill_400",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 15,
+            "hour": 19,
+            "minute": 25
+        },
+        "start_timestamp": 1734290748,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 17
+        },
+        "duration_timestamp": 1073
+    },
+    {
+        "mapname": "4p_coh2_okariver_frontline",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 15,
+            "hour": 19,
+            "minute": 4
+        },
+        "start_timestamp": 1734289468,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 15
+        },
+        "duration_timestamp": 951
+    },
+    {
+        "mapname": "4p_coh2_okariver_frontline",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 15,
+            "hour": 18,
+            "minute": 38
+        },
+        "start_timestamp": 1734287927,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 16
+        },
+        "duration_timestamp": 969
+    },
+    {
+        "mapname": "6p_fields_of_winnekendonk",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 11,
+            "hour": 17,
+            "minute": 6
+        },
+        "start_timestamp": 1733936818,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 50
+        },
+        "duration_timestamp": 3023
+    },
+    {
+        "mapname": "4p_crossing_in_the_woods",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 1,
+            "hour": 12,
+            "minute": 20
+        },
+        "start_timestamp": 1733055653,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 42
+        },
+        "duration_timestamp": 2576
+    },
+    {
+        "mapname": "4p_einhoven_country",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 12,
+            "day": 1,
+            "hour": 11,
+            "minute": 54
+        },
+        "start_timestamp": 1733054094,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 23
+        },
+        "duration_timestamp": 1409
+    },
+    {
+        "mapname": "highwaybaku",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 30,
+            "hour": 21,
+            "minute": 31
+        },
+        "start_timestamp": 1733002313,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 20
+        },
+        "duration_timestamp": 1250
+    },
+    {
+        "mapname": "4p_minsk_pocket_frontline",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 30,
+            "hour": 20,
+            "minute": 59
+        },
+        "start_timestamp": 1733000342,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 29
+        },
+        "duration_timestamp": 1796
+    },
+    {
+        "mapname": "4p_dreux_scout",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 30,
+            "hour": 20,
+            "minute": 7
+        },
+        "start_timestamp": 1732997232,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 43
+        },
+        "duration_timestamp": 2604
+    },
+    {
+        "mapname": "wolfheze",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 30,
+            "hour": 19,
+            "minute": 47
+        },
+        "start_timestamp": 1732996030,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 13
+        },
+        "duration_timestamp": 807
+    },
+    {
+        "mapname": "4p_belgorod",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 25,
+            "hour": 21,
+            "minute": 8
+        },
+        "start_timestamp": 1732568893,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 18
+        },
+        "duration_timestamp": 1122
+    },
+    {
+        "mapname": "4p_belgorod",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 25,
+            "hour": 20,
+            "minute": 54
+        },
+        "start_timestamp": 1732568068,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 10
+        },
+        "duration_timestamp": 615
+    },
+    {
+        "mapname": "wolfheze",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 25,
+            "hour": 20,
+            "minute": 13
+        },
+        "start_timestamp": 1732565587,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 33
+        },
+        "duration_timestamp": 2038
+    },
+    {
+        "mapname": "6p_across_the_rhine",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 9,
+            "hour": 22,
+            "minute": 50
+        },
+        "start_timestamp": 1731192607,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 27
+        },
+        "duration_timestamp": 1626
+    },
+    {
+        "mapname": "6p_port_of_hamburg",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 9,
+            "hour": 22,
+            "minute": 15
+        },
+        "start_timestamp": 1731190527,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 30
+        },
+        "duration_timestamp": 1856
+    },
+    {
+        "mapname": "8p_redball_express",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 9,
+            "hour": 21,
+            "minute": 29
+        },
+        "start_timestamp": 1731187770,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 41
+        },
+        "duration_timestamp": 2506
+    },
+    {
+        "mapname": "4p_dreux_scout",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 4,
+            "hour": 18,
+            "minute": 37
+        },
+        "start_timestamp": 1730745427,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 25
+        },
+        "duration_timestamp": 1513
+    },
+    {
+        "mapname": "4p_belgorod",
+        "gameformat": 2,
+        "startgametime": {
+            "year": 2024,
+            "month": 11,
+            "day": 4,
+            "hour": 18,
+            "minute": 12
+        },
+        "start_timestamp": 1730743955,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 17
+        },
+        "duration_timestamp": 1050
+    },
+    {
+        "mapname": "langres",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2024,
+            "month": 5,
+            "day": 6,
+            "hour": 21,
+            "minute": 40
+        },
+        "start_timestamp": 1715031641,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 26
+        },
+        "duration_timestamp": 1593
+    },
+    {
+        "mapname": "2p_faymonville_approach",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2024,
+            "month": 5,
+            "day": 6,
+            "hour": 21,
+            "minute": 20
+        },
+        "start_timestamp": 1715030414,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 11
+        },
+        "duration_timestamp": 674
+    },
+    {
+        "mapname": "vilshanka",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2024,
+            "month": 5,
+            "day": 6,
+            "hour": 21,
+            "minute": 5
+        },
+        "start_timestamp": 1715029530,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 9
+        },
+        "duration_timestamp": 584
+    },
+    {
+        "mapname": "amilly_fields",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2024,
+            "month": 4,
+            "day": 18,
+            "hour": 15,
+            "minute": 15
+        },
+        "start_timestamp": 1713453319,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 26
+        },
+        "duration_timestamp": 1595
+    },
+    {
+        "mapname": "langres",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2024,
+            "month": 4,
+            "day": 14,
+            "hour": 22,
+            "minute": 52
+        },
+        "start_timestamp": 1713135149,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 32
+        },
+        "duration_timestamp": 1950
+    },
+    {
+        "mapname": "2p_crossing_in_the_woods",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2024,
+            "month": 4,
+            "day": 14,
+            "hour": 22,
+            "minute": 34
+        },
+        "start_timestamp": 1713134094,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 15
+        },
+        "duration_timestamp": 931
+    },
+    {
+        "mapname": "ploiesti",
+        "gameformat": 1,
+        "startgametime": {
+            "year": 2024,
+            "month": 4,
+            "day": 14,
+            "hour": 22,
+            "minute": 24
+        },
+        "start_timestamp": 1713133447,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 9
+        },
+        "duration_timestamp": 562
+    },
+    {
+        "mapname": "6p_across_the_rhine",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 2,
+            "day": 23,
+            "hour": 18,
+            "minute": 37
+        },
+        "start_timestamp": 1708713433,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 20
+        },
+        "duration_timestamp": 1248
+    },
+    {
+        "mapname": "6p_fields_of_winnekendonk",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 2,
+            "day": 23,
+            "hour": 18,
+            "minute": 6
+        },
+        "start_timestamp": 1708711605,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 27
+        },
+        "duration_timestamp": 1679
+    },
+    {
+        "mapname": "6p_across_the_rhine",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 1,
+            "day": 5,
+            "hour": 23,
+            "minute": 7
+        },
+        "start_timestamp": 1704496062,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 39
+        },
+        "duration_timestamp": 2343
+    },
+    {
+        "mapname": "6p_hill_400",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 1,
+            "day": 5,
+            "hour": 22,
+            "minute": 39
+        },
+        "start_timestamp": 1704494397,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 24
+        },
+        "duration_timestamp": 1498
+    },
+    {
+        "mapname": "8p_whiteball_express",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 1,
+            "day": 4,
+            "hour": 23,
+            "minute": 26
+        },
+        "start_timestamp": 1704410818,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 31
+        },
+        "duration_timestamp": 1918
+    },
+    {
+        "mapname": "8p_essen_steelworks",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 1,
+            "day": 4,
+            "hour": 23,
+            "minute": 2
+        },
+        "start_timestamp": 1704409373,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 19
+        },
+        "duration_timestamp": 1195
+    },
+    {
+        "mapname": "8p_whiteball_express",
+        "gameformat": 3,
+        "startgametime": {
+            "year": 2024,
+            "month": 1,
+            "day": 3,
+            "hour": 20,
+            "minute": 43
+        },
+        "start_timestamp": 1704314638,
+        "gameduration": {
+            "hours": 0,
+            "minutes": 42
+        },
+        "duration_timestamp": 2568
+    }
+]
