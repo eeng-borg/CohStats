@@ -1,8 +1,11 @@
 import json
+from multiprocessing.reduction import duplicate
 import requests
 from datetime import datetime
 import os
 import time
+
+from enums import DatabaseType
 
 
 
@@ -44,21 +47,21 @@ def _get_response(player_id):
 
 
 # lista się resetuje co cykl w funckji powyżej
-def _filter_duplicates(new_list, list):
+def _filter_duplicates(new_list, list, duplicate_key): # duplicate_key what value should we compare
 
     for new_element in new_list:
 
-        # for testing
-        try:
-            print(f"{new_element['id']} - {datetime.fromtimestamp(new_element["startgametime"])}")
-        except:
-            pass
+        # # for testing
+        # try:
+        #     print(f"{new_element[duplicate_key]} - {datetime.fromtimestamp(new_element["startgametime"])}")
+        # except:
+        #     pass
 
 
-        if not any(new_element['id'] == entry['id'] for entry in list):
+        if not any(new_element[duplicate_key] == entry[duplicate_key] for entry in list):
             
-            print(f"{new_element['id']} joined!!")
-            print(', '.join(str(new_element['id']) for new_element in list))
+            # print(f"{new_element[duplicate_key]} joined!!")
+            # print(', '.join(str(new_element[duplicate_key]) for new_element in list))
             list.append(new_element)
 
    
@@ -80,17 +83,18 @@ def load_database_matches(file_name = "database_matches.json"):
         
 
 
-def _save_cohacze_matches_json(combine_matches, file_name = "databse_matches.json"):
+def _save_database(database, database_type):
 
+    file_name = f"databse_{database_type}.json"
     # write in file just for visualisation
     with open(file_name, "w") as json_file:
 
-        json.dump(combine_matches, json_file, indent=4)  # `indent=4` makes it readable
+        json.dump(database, json_file, indent=4)  # `indent=4` makes it readable
 
 
 
 # filter out and combine matches of serwer serwer players
-def update_databse_matches(players, load_database_matches = load_database_matches, get_response = _get_response, filter_duplicates = _filter_duplicates):
+def update_database_matches(players, load_database_matches = load_database_matches, save_database = _save_database, get_response = _get_response, filter_duplicates = _filter_duplicates) -> list:
 
     combine_matches = load_database_matches()
 
@@ -99,39 +103,69 @@ def update_databse_matches(players, load_database_matches = load_database_matche
         print(f"---------------\n {player.name}\n")
 
         match_history = get_response(player.value) # fetch player games history
+
         match_history_stats = match_history["matchHistoryStats"] # get games stats, there are also profiles of players and other stuff
+        
         print(f"All games: {len(match_history_stats)}")
 
         # avoid duplicates, checks if match with given id is not already present in combine matches list
-        combine_matches = filter_duplicates(match_history_stats, combine_matches)
+        combine_matches = filter_duplicates(match_history_stats, combine_matches, duplicate_key = 'id')
 
     print(f"combine_matches: {len(combine_matches)}")
     print(', '.join(str(match['id']) for match in combine_matches))
 
-    _save_cohacze_matches_json(combine_matches)
+    save_database(combine_matches, DatabaseType.matches.value)
+
     return combine_matches
 
 
 
+def load_database_profiles(file_name = "database_profiles.json"):
+
+    if os.path.exists(file_name):
+        with open(file_name, 'r', encoding='utf-8') as f:
+
+            profiles = json.load(f)
+            return profiles
+    
+    else:
+        return []
+    
 
 
-def get_profiles(players, get_response = _get_response):
+def update_database_profiles(players, load_database_profiles = load_database_profiles, get_response = _get_response, save_database = _save_database, filter_duplicates = _filter_duplicates) -> list:
 
-    profiles = get_response(players)
-    with open("profiles.json", "w") as f:
-        json.dump(profiles, f)
+    combine_profiles = load_database_profiles()
+
+    for player in players:
+
+        database = get_response(player.value)
+        new_profiles = database["profiles"]
+        combine_profiles = filter_duplicates(new_profiles, combine_profiles, duplicate_key = 'profile_id')
+
+    save_database(combine_profiles, DatabaseType.profiles.value)
         
-    return list(profiles)
+    return combine_profiles
 
 
 
-
-def update_database(players, update_databse_matches=update_databse_matches):
+# update profiles and matches in the same time 
+def update_database(
+        players, 
+        update_databse_matches = update_database_matches, 
+        update_database_profiles = update_database_profiles, 
+        get_response = _get_response,
+        load_database_profiles = load_database_profiles,
+        load_database_matches = load_database_matches,
+        save_database = _save_database
+        ):
 
     # update
-    update_databse_matches(players)
-        
-
+    database_matches = update_databse_matches(players, get_response=get_response, save_database=save_database, load_database_matches=load_database_matches)
+    database_profiles = update_database_profiles(players, get_response=get_response, save_database=save_database, load_database_profiles=load_database_profiles)
+    
+    # mostly for testing
+    return {"matches": database_matches, "profiles": database_profiles}
 
     
     

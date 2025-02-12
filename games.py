@@ -1,4 +1,4 @@
-from data import load_database_matches
+from data import load_database_matches, load_database_profiles
 import math
 from datetime import datetime
 from enums import DatabaseType
@@ -6,10 +6,11 @@ from enums import DatabaseType
 
 class Games:
 
-    def __init__(self, load_database_matches = load_database_matches):
+    # instance injection for easier testing,
+    def __init__(self, load_database_matches = load_database_matches, load_database_profiles = load_database_profiles):
 
         self.load_database_matches = load_database_matches
-
+        self.load_database_profiles = load_database_profiles
         self.last_games = []
 
 
@@ -56,11 +57,19 @@ class Games:
 
 
     # # data.profile
+    
     # def _get_player_name(self, player_id):
 
-    #     for player_profile in self.load_database_profiles:
+    #     print(f"player_id: {player_id}")
+
+
+    #     for player_profile in self.load_database_profiles():
+
     #         if player_profile["profile_id"] == player_id:
+                
     #             return player_profile["alias"]
+        
+    #     return None
 
 
 
@@ -68,6 +77,7 @@ class Games:
     # @staticmethod
     # def _get_players(match, team, get_player_name = _get_player_name):
 
+    #     print(f"get players")
     #     players_list = match['matchhistoryreportresults']
     #     players_in_team = []
 
@@ -76,15 +86,18 @@ class Games:
 
     #             player_dict = {}
 
-    #             player_dict['name'] = get_player_name # convert id to name
+    #             player_dict['name'] = _get_player_name(player['profile_id']) # convert id to name
+
     #             player_dict['faction'] = player['race_id'] # convert id to name
 
     #             players_in_team.append(player_dict)
+        
+    #     return players_in_team
 
 
 
     # add to the existsing list, not reasing
-    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration):
+    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration): #, get_players = _get_players):
 
         cohacze_matches = self.load_database_matches()
 
@@ -100,8 +113,8 @@ class Games:
             simplified_match_stat['start_timestamp'] = match['startgametime']
             simplified_match_stat['gameduration'] = get_game_duration(match, 'datetime')
             simplified_match_stat['duration_timestamp'] = get_game_duration(match, 'timestamp')
-            # simplified_match_stat['team_0'] = get_players(match, 0)
-            # simplified_match_stat['team_1'] = get_players(match, 1)
+            # simplified_match_stat['team_0'] = get_players(match=match, team=0)
+            # simplified_match_stat['team_1'] = get_players(match=match, team=1)
 
 
             self.last_games.append(simplified_match_stat)

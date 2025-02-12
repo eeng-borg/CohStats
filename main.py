@@ -12,7 +12,11 @@ class Cohacze(Enum):
     woyna = 3734845
     
 
-# data.update_databse_matches(Cohacze)
+# data.update_database_matches(Cohacze)
+# data.update_database_profiles(Cohacze)
+
+# data.update_database(Cohacze)
+
 games = Games()
 games.get_history_simplified()
 games.sort_games()
@@ -21,8 +25,8 @@ games.sort_games()
 
 # print(f"last_game: {Games.last_games}")
 
-with open("results.json", "w") as json_file:
-    json.dump(games.last_games, json_file, indent=4)
+# with open("results.json", "w") as json_file:
+#     json.dump(games.last_games, json_file, indent=4)
 
 
 

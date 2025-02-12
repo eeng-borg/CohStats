@@ -2968,7 +2968,39 @@ def _dummy_database_matches():
     },
     ]
 
-
+def _dummy_database_profiles():
+    return [
+    {
+        "profile_id": 710149,
+        "name": "/steam/76561198072580481",
+        "alias": "Servo",
+        "personal_statgroup_id": 704920,
+        "xp": 18785964,
+        "level": 300,
+        "leaderboardregion_id": 0,
+        "country": "be"
+    },
+    {
+        "profile_id": 1027269,
+        "name": "/steam/76561198090749128",
+        "alias": "Fritz",
+        "personal_statgroup_id": 1024345,
+        "xp": 18785964,
+        "level": 300,
+        "leaderboardregion_id": 0,
+        "country": "de"
+    },
+    {
+        "profile_id": 413238,
+        "name": "/steam/76561197981443937",
+        "alias": "TheRegulator",
+        "personal_statgroup_id": 403225,
+        "xp": 18785964,
+        "level": 300,
+        "leaderboardregion_id": 0,
+        "country": "dk"
+    },
+    ]
 
 # def _dummy_database_profiles():
 
@@ -2976,7 +3008,7 @@ def _dummy_database_matches():
 
 @pytest.fixture
 def mock_games():
-    games = Games(_dummy_database_matches)
+    games = Games(_dummy_database_matches, _dummy_database_profiles)
     return games
 
 
@@ -3089,6 +3121,17 @@ class TestGetHistorySimplified:
         assert len(last_games) == 4
 
 
+
+@pytest.mark.parametrize("player_id, alias", [
+(710149, "Servo"),
+(1027269, "Fritz"),
+(413238, "TheRegulator"),
+(111, None),
+])
+def test_get_player_name(mock_games, player_id, alias):
+    
+    result = mock_games._get_player_name(player_id)
+    assert result == alias
 
 
 

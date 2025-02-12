@@ -1,11 +1,12 @@
+from unittest import result
 import pytest
-from data import _filter_duplicates
+from data import _filter_duplicates, load_database_matches
 from data import _filter_duplicates
 from unittest.mock import patch, MagicMock
 import data
 import json
 import os
-from data import update_databse_matches
+from data import update_database_matches, update_database_profiles, update_database
 
 
 class TestFilterDuplicates:
@@ -19,7 +20,7 @@ class TestFilterDuplicates:
             {'id': 3}
         ]
 
-        result = _filter_duplicates(matches_list, combined_matches)
+        result = _filter_duplicates(matches_list, combined_matches, 'id')
         assert len(result) == 3
         assert result == matches_list
 
@@ -37,7 +38,7 @@ class TestFilterDuplicates:
             {'id': 2, 'description': 'match2_duplicate'}
         ]
 
-        result = _filter_duplicates(matches_list, combined_matches)
+        result = _filter_duplicates(matches_list, combined_matches, 'id')
 
         assert len(result) == 3
         assert {'id': 1, 'description': 'match1'} in result
@@ -48,7 +49,7 @@ class TestFilterDuplicates:
     def test__empty_list(self):
         combined_matches = []
         matches_list = []
-        result = _filter_duplicates(matches_list, combined_matches)
+        result = _filter_duplicates(matches_list, combined_matches, 'id')
         assert len(result) == 0
         assert result == []
 
@@ -63,7 +64,7 @@ class TestFilterDuplicates:
             {'id': 1, 'description': 'match1_duplicate2'}
         ]
 
-        result = _filter_duplicates(matches_list, combined_matches)
+        result = _filter_duplicates(matches_list, combined_matches, 'id')
         assert len(result) == 1
         assert {'id': 1, 'description': 'match1'} in result
 
@@ -117,7 +118,7 @@ class TestFilterDuplicates:
 
 
 
-class TestGetCohaczeMatches:
+class TestUpdateDatabase:
 
     @staticmethod
     def dummny_get_response(arg):
@@ -128,46 +129,144 @@ class TestGetCohaczeMatches:
                     {'id': 1, 'description': 'SESSION_MATCH_KEY'},
                     {'id': 2, 'description': 'AUTOMATCH'},
                     {'id': 3, 'description': 'SESSION_MATCH_KEY'},
-                    {'id': 6, 'description': 'SESSION_MATCH_KEY'},
-                    ]
-            } 
+                    {'id': 4, 'description': 'SESSION_MATCH_KEY'},
+                    ],
+                "profiles":[
+                    {"profile_id": 1},
+                    {"profile_id": 2},
+                    {"profile_id": 3},
+                    {"profile_id": 4},
+
+                ]
+            }
         
-        if arg == 2:
+        elif arg == 2:
             return {
                 "matchHistoryStats": [
                     {'id': 3, 'description': 'SESSION_MATCH_KEY'},
-                    {'id': 6, 'description': 'SESSION_MATCH_KEY'},
-                    {'id': 9, 'description': 'SESSION_MATCH_KEY'},
-                    {'id': 13, 'description': 'AUTOMATCH'}
+                    {'id': 4, 'description': 'SESSION_MATCH_KEY'},
+                    {'id': 5, 'description': 'SESSION_MATCH_KEY'},
+                    {'id': 6, 'description': 'AUTOMATCH'}
+                    ],
+                "profiles": [
+                    {"profile_id": 3},
+                    {"profile_id": 4},
+                    {"profile_id": 5},
+                    {"profile_id": 6},
                     ]
-            }     
+                    
+            }
+        
+        else:
+            return {
+                "matchHistoryStats": [],
+                "profiles": []
+            }
+
 
 
     
     @staticmethod
-    def dummny_save_cohacze_matches_json(*args):
+    def dummy_save_database(*args):
         pass 
 
 
+    @pytest.fixture
+    def players(self):
+        return [MagicMock(value=1), MagicMock(value=2)]
+    
 
-    def test_get_our_matches(self, monkeypatch):
 
-        # Mock cohacze enums
-        players = [MagicMock(value=1), MagicMock(value=2)]
-        
-        monkeypatch.setattr(data, "_save_cohacze_matches_json", TestGetCohaczeMatches.dummny_save_cohacze_matches_json)
-
+    def test_update_matches_new(self, players):
+     
         # Call the function
-        result = update_databse_matches(players, lambda: [], TestGetCohaczeMatches.dummny_get_response)
+        result = update_database_matches(players, lambda: [], TestUpdateDatabase.dummy_save_database,  TestUpdateDatabase.dummny_get_response)
 
         # Assertions
         assert len(result) == 6
         assert {'id': 1, 'description': 'SESSION_MATCH_KEY'} in result
         assert {'id': 2, 'description': 'AUTOMATCH'} in result
         assert {'id': 3, 'description': 'SESSION_MATCH_KEY'} in result
-        assert {'id': 6, 'description': 'SESSION_MATCH_KEY'} in result
-        assert {'id': 9, 'description': 'SESSION_MATCH_KEY'} in result
-        assert {'id': 13, 'description': 'AUTOMATCH'} in result
+        assert {'id': 4, 'description': 'SESSION_MATCH_KEY'} in result
+        assert {'id': 5, 'description': 'SESSION_MATCH_KEY'} in result
+        assert {'id': 6, 'description': 'AUTOMATCH'} in result
+
+    # def existing_database
+
+
+
+    def test_update_matches_on_existing(self, players):
+
+        
+        database = [
+            {'id': 1, 'description': 'SESSION_MATCH_KEY'},
+            {'id': 7, 'description': 'AUTOMATCH'}
+
+        ]
+        # Call the function
+        result = update_database_matches(players, lambda: database, TestUpdateDatabase.dummy_save_database,  TestUpdateDatabase.dummny_get_response)
+
+        # Assertions
+        assert len(result) == 7
+        assert {'id': 1, 'description': 'SESSION_MATCH_KEY'} in result
+        assert {'id': 2, 'description': 'AUTOMATCH'} in result
+        assert {'id': 3, 'description': 'SESSION_MATCH_KEY'} in result
+        assert {'id': 4, 'description': 'SESSION_MATCH_KEY'} in result
+        assert {'id': 5, 'description': 'SESSION_MATCH_KEY'} in result
+        assert {'id': 6, 'description': 'AUTOMATCH'} in result
+        assert {'id': 7, 'description': 'AUTOMATCH'} in result
+
+
+
+    def test_update_profiles_new(self, players):
+
+        result = update_database_profiles(players, lambda:[], TestUpdateDatabase.dummny_get_response, TestUpdateDatabase.dummy_save_database)
+        assert len(result) == 6
+        
+        for id in range(6):
+            assert {"profile_id": id + 1} in result
+
+
+
+    def test_update_profiles_on_existing(self, players):
+
+        result = update_database_profiles(players, lambda:[{"profile_id": 1}, {"profile_id": 7}], TestUpdateDatabase.dummny_get_response, TestUpdateDatabase.dummy_save_database)
+        assert len(result) == 7
+        
+        for id in range(7):
+            assert {"profile_id": id + 1} in result
+
+
+
+    def test_update_database_new(self,players):
+
+
+        result = update_database(players,
+                                 load_database_matches=lambda:[],
+                                 load_database_profiles=lambda:[],
+                                 get_response=TestUpdateDatabase.dummny_get_response, 
+                                 save_database=TestUpdateDatabase.dummy_save_database)
+        
+        assert len(result) == 2
+
+
+
+    def test_update_database_on_existing(self,players):
+
+        old_database_matches = [
+            {'id': 1, 'description': 'SESSION_MATCH_KEY'},
+            {'id': 7, 'description': 'AUTOMATCH'}
+
+        ]
+        old_database_profiles = [{"profile_id": 1}, {"profile_id": 7}]
+
+        result = update_database(players,
+                                 load_database_matches=lambda:old_database_matches,
+                                 load_database_profiles=lambda:old_database_profiles,
+                                 get_response=TestUpdateDatabase.dummny_get_response, 
+                                 save_database=TestUpdateDatabase.dummy_save_database)
+        
+        assert len(result) == 2
 
 
 
