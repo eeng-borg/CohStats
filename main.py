@@ -25,8 +25,8 @@ games.sort_games()
 
 # print(f"last_game: {Games.last_games}")
 
-# with open("results.json", "w") as json_file:
-#     json.dump(games.last_games, json_file, indent=4)
+with open("results.json", "w") as json_file:
+    json.dump(games.last_games, json_file, indent=4)
 
 
 

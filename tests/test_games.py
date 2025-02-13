@@ -1,7 +1,9 @@
 from datetime import datetime
+from os import name
 from games import Games
 import pytest
 import data
+from enums import Factions
 
 
 def _dummy_database_matches():
@@ -3129,10 +3131,104 @@ class TestGetHistorySimplified:
 (111, None),
 ])
 def test_get_player_name(mock_games, player_id, alias):
-    
+
     result = mock_games._get_player_name(player_id)
     assert result == alias
 
+
+
+class TestGetPlayers:
+    @pytest.fixture
+    def match_members(self):
+        return {
+                    "matchhistoryreportresults": [
+                {
+                    "matchhistory_id": 383702785,
+                    "profile_id": 710149,
+                    "resulttype": 1,
+                    "teamid": 0,
+                    "race_id": 1,
+                    "xpgained": 21417,
+                    "counters": "{\"abil\":69,\"blost\":5,\"bprod\":38,\"cabil\":4,\"cflags\":0,\"cpearn\":24,\"dmgdone\":38289,\"edeaths\":122,\"ekills\":124,\"erein\":110,\"fuelearn\":782,\"fuelmax\":151,\"fuelspnt\":745,\"gt\":1988,\"ismod\":0,\"manearn\":7353,\"manmax\":1304,\"manspnt\":7073,\"munearn\":1230,\"munmax\":163,\"munspnt\":1160,\"pcap\":23,\"plost\":18,\"popmax\":0,\"precap\":23,\"sqkilled\":13,\"sqlost\":4,\"sqprod\":14,\"svetrank\":8,\"svetxp\":12520,\"upg\":9,\"utypes\":10,\"vabnd\":0,\"vcap\":0,\"version\":3,\"vkill\":3,\"vlost\":3,\"vp0\":209,\"vp1\":0,\"vprod\":5,\"vvetrank\":18,\"vvetxp\":13140,\"wpnpu\":0}",
+                    "matchstartdate": 1738442136
+                },
+                {
+                    "matchhistory_id": 383702785,
+                    "profile_id": 1027269,
+                    "resulttype": 0,
+                    "teamid": 1,
+                    "race_id": 2,
+                    "xpgained": 16808,
+                    "counters": "{\"abil\":82,\"blost\":4,\"bprod\":16,\"cabil\":1,\"cflags\":0,\"cpearn\":20,\"dmgdone\":22406,\"edeaths\":114,\"ekills\":99,\"erein\":69,\"fuelearn\":804,\"fuelmax\":271,\"fuelspnt\":755,\"gt\":1988,\"ismod\":0,\"manearn\":7932,\"manmax\":1073,\"manspnt\":7773,\"munearn\":1234,\"munmax\":231,\"munspnt\":1010,\"pcap\":21,\"plost\":17,\"popmax\":0,\"precap\":17,\"sqkilled\":4,\"sqlost\":11,\"sqprod\":18,\"svetrank\":6,\"svetxp\":8620,\"upg\":14,\"utypes\":11,\"vabnd\":0,\"vcap\":0,\"version\":3,\"vkill\":2,\"vlost\":3,\"vp0\":209,\"vp1\":0,\"vprod\":10,\"vvetrank\":16,\"vvetxp\":11640,\"wpnpu\":1}",
+                    "matchstartdate": 1738442136
+                },
+                {
+                    "matchhistory_id": 383702785,
+                    "profile_id": 413238,
+                    "resulttype": 1,
+                    "teamid": 0,
+                    "race_id": 3,
+                    "xpgained": 18758,
+                    "counters": "{\"abil\":83,\"blost\":5,\"bprod\":21,\"cabil\":4,\"cflags\":0,\"cpearn\":21,\"dmgdone\":26810,\"edeaths\":167,\"ekills\":86,\"erein\":132,\"fuelearn\":782,\"fuelmax\":336,\"fuelspnt\":580,\"gt\":1988,\"ismod\":0,\"manearn\":7377,\"manmax\":778,\"manspnt\":7353,\"munearn\":1230,\"munmax\":214,\"munspnt\":1221,\"pcap\":20,\"plost\":16,\"popmax\":0,\"precap\":14,\"sqkilled\":5,\"sqlost\":10,\"sqprod\":13,\"svetrank\":2,\"svetxp\":7060,\"upg\":9,\"utypes\":10,\"vabnd\":0,\"vcap\":0,\"version\":3,\"vkill\":2,\"vlost\":3,\"vp0\":209,\"vp1\":0,\"vprod\":5,\"vvetrank\":18,\"vvetxp\":10540,\"wpnpu\":0}",
+                    "matchstartdate": 1738442136
+                },
+                {
+                    "matchhistory_id": 383702785,
+                    "profile_id": 1027269,
+                    "resulttype": 0,
+                    "teamid": 1,
+                    "race_id": 0,
+                    "xpgained": 21297,
+                    "counters": "{\"abil\":61,\"blost\":1,\"bprod\":16,\"cabil\":2,\"cflags\":0,\"cpearn\":24,\"dmgdone\":26836,\"edeaths\":102,\"ekills\":184,\"erein\":74,\"fuelearn\":804,\"fuelmax\":241,\"fuelspnt\":645,\"gt\":1988,\"ismod\":0,\"manearn\":7225,\"manmax\":1214,\"manspnt\":7220,\"munearn\":1210,\"munmax\":359,\"munspnt\":1000,\"pcap\":23,\"plost\":20,\"popmax\":0,\"precap\":17,\"sqkilled\":9,\"sqlost\":8,\"sqprod\":14,\"svetrank\":4,\"svetxp\":8270,\"upg\":12,\"utypes\":11,\"vabnd\":0,\"vcap\":0,\"version\":3,\"vkill\":3,\"vlost\":2,\"vp0\":209,\"vp1\":0,\"vprod\":5,\"vvetrank\":17,\"vvetxp\":11080,\"wpnpu\":0}",
+                    "matchstartdate": 1738442136
+                }
+            ],
+        }
+
+
+
+    def test_number_of_players(self, mock_games, match_members):
+
+        result = mock_games._get_players(match_members, team = 0)
+        assert len(result) == 2
+
+
+
+    # @pytest.mark.parametrize("name, faction", [
+    # ("sergu", 1),
+    # ("Karl", 2),
+    # ("Ing", 1),
+    # ("Fritz", 0),
+    # ])
+    # @pytest.mark
+    def test_data_faction_of_players(self, mock_games, match_members):
+
+        result = mock_games._get_players(match_members, team = 0)
+        assert result[0]['faction'] == Factions.Soviet.name
+        assert result[1]['faction'] == Factions.USF.name
+
+
+
+    def test_data_names_of_players(self, mock_games, match_members):
+
+        result = mock_games._get_players(match_members, team = 0)
+        assert result[0]['name'] == 'Servo'
+        assert result[1]['name'] == 'TheRegulator'
+
+
+
+
+@pytest.mark.parametrize("race_id, faction_name", [
+    (0, Factions.OST.name),
+    (1, Factions.Soviet.name),
+    (2, Factions.OKW.name),
+    (3, Factions.USF.name),
+    (4, Factions.UKF.name),
+])
+def test_race_id_to_name(mock_games, race_id, faction_name):
+
+    result = mock_games._race_id_to_name(race_id)
+    assert result == faction_name
 
 
 # def test_get_players_team_0(mock_games: Games):

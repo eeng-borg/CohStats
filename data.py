@@ -85,7 +85,7 @@ def load_database_matches(file_name = "database_matches.json"):
 
 def _save_database(database, database_type):
 
-    file_name = f"databse_{database_type}.json"
+    file_name = f"database_{database_type}.json"
     # write in file just for visualisation
     with open(file_name, "w") as json_file:
 

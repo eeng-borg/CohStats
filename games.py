@@ -1,7 +1,7 @@
 from data import load_database_matches, load_database_profiles
 import math
 from datetime import datetime
-from enums import DatabaseType
+from enums import DatabaseType, Factions
 
 
 class Games:
@@ -56,48 +56,55 @@ class Games:
     
 
 
-    # # data.profile
+    # data.profile
     
-    # def _get_player_name(self, player_id):
+    def _get_player_name(self, player_id):
 
-    #     print(f"player_id: {player_id}")
+        print(f"player_id: {player_id}")
 
 
-    #     for player_profile in self.load_database_profiles():
+        for player_profile in self.load_database_profiles():
 
-    #         if player_profile["profile_id"] == player_id:
+            if player_profile["profile_id"] == player_id:
                 
-    #             return player_profile["alias"]
+                return player_profile["alias"]
         
-    #     return None
+        return None
+    
 
+    @staticmethod
+    def _race_id_to_name(race_id):
+
+        for faction in Factions:
+            if faction.value == race_id:
+                return str(faction.name)
 
 
     
-    # @staticmethod
-    # def _get_players(match, team, get_player_name = _get_player_name):
+    def _get_players(self, match, team, get_player_name = None, race_id_to_name = _race_id_to_name):
 
-    #     print(f"get players")
-    #     players_list = match['matchhistoryreportresults']
-    #     players_in_team = []
+        print(f"get players")
+        players_list = match['matchhistoryreportresults']
+        players_in_team = []
 
-    #     for player in players_list:
-    #         if player['teamid'] == team:
+        for player in players_list:
+            if player['teamid'] == team:
 
-    #             player_dict = {}
+                player_dict = {}
 
-    #             player_dict['name'] = _get_player_name(player['profile_id']) # convert id to name
+                if get_player_name is None:
+                    player_dict['name'] = self._get_player_name(player['profile_id']) # convert id to name
 
-    #             player_dict['faction'] = player['race_id'] # convert id to name
-
-    #             players_in_team.append(player_dict)
+                player_dict['faction'] = race_id_to_name(player['race_id']) # convert id to name
+                players_in_team.append(player_dict)
         
-    #     return players_in_team
+
+        return players_in_team
 
 
 
     # add to the existsing list, not reasing
-    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration): #, get_players = _get_players):
+    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration, get_players = None):
 
         cohacze_matches = self.load_database_matches()
 
@@ -105,7 +112,8 @@ class Games:
         for match in cohacze_matches:
 
             simplified_match_stat = {}
-
+            
+            simplified_match_stat['id'] = match['id'] 
             simplified_match_stat['mapname'] = match['mapname']            
             simplified_match_stat['gameformat'] = get_game_format(match)
             simplified_match_stat['startgametime'] = convert_time(match)
@@ -113,8 +121,10 @@ class Games:
             simplified_match_stat['start_timestamp'] = match['startgametime']
             simplified_match_stat['gameduration'] = get_game_duration(match, 'datetime')
             simplified_match_stat['duration_timestamp'] = get_game_duration(match, 'timestamp')
-            # simplified_match_stat['team_0'] = get_players(match=match, team=0)
-            # simplified_match_stat['team_1'] = get_players(match=match, team=1)
+
+            if get_players == None:
+                simplified_match_stat['team_0'] = self._get_players(match, team=0)
+                simplified_match_stat['team_1'] = self._get_players(match, team=1)
 
 
             self.last_games.append(simplified_match_stat)
@@ -136,5 +146,6 @@ class Games:
         self.last_games = sorted(games, key=lambda x: x.get(sort_by, 0), reverse=reverse)
         print("----------\n Sorted")
         print([game[sort_by] for game in self.last_games])
+
 
         return self.last_games
