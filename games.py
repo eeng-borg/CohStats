@@ -72,6 +72,7 @@ class Games:
         return None
     
 
+
     @staticmethod
     def _race_id_to_name(race_id):
 
@@ -80,7 +81,8 @@ class Games:
                 return str(faction.name)
 
 
-    
+
+    # return players from on of the team, get their names and faction
     def _get_players(self, match, team, get_player_name = None, race_id_to_name = _race_id_to_name):
 
         print(f"get players")
@@ -100,11 +102,23 @@ class Games:
         
 
         return players_in_team
+    
+
+    @staticmethod
+    def _get_match_type(description):
+
+        if description == "AUTOMATCH":
+            return "Automatch"
+        
+        else:
+            return "Custom"
+
+
 
 
 
     # add to the existsing list, not reasing
-    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration, get_players = None):
+    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration, get_players = None, get_match_type = _get_match_type):
 
         cohacze_matches = self.load_database_matches()
 
@@ -116,6 +130,7 @@ class Games:
             simplified_match_stat['id'] = match['id'] 
             simplified_match_stat['mapname'] = match['mapname']            
             simplified_match_stat['gameformat'] = get_game_format(match)
+            simplified_match_stat['gametype'] = get_match_type(match['description'])
             simplified_match_stat['startgametime'] = convert_time(match)
             print(f"{simplified_match_stat['startgametime']} - {match['id']}")
             simplified_match_stat['start_timestamp'] = match['startgametime']

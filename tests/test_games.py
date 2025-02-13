@@ -1,5 +1,6 @@
 from datetime import datetime
 from os import name
+from unittest import result
 from games import Games
 import pytest
 import data
@@ -3229,6 +3230,19 @@ def test_race_id_to_name(mock_games, race_id, faction_name):
 
     result = mock_games._race_id_to_name(race_id)
     assert result == faction_name
+
+
+
+@pytest.mark.parametrize("old_match_type, converted_type", [
+    ("AUTOMATCH", "Automatch"),
+    ("SESSION_MATCH_KEY", "Custom")
+])
+def test_get_match_type(mock_games, old_match_type, converted_type):
+
+    result = mock_games._get_match_type(old_match_type)
+    assert result == converted_type
+
+
 
 
 # def test_get_players_team_0(mock_games: Games):
