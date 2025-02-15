@@ -1,15 +1,12 @@
 import json
-from games import Games
+from games_list import GamesList
 from enum import Enum
 import data
+from enums import Cohacze
 
 # match_history = sorted(match_history, key=lambda x: x.get('startgametime', 0), reverse=True)
 
 # tymczasowe, później do klasy z cohaczami
-class Cohacze(Enum):
-    Ing = 5850752
-    Garneck = 3745878
-    woyna = 3734845
     
 
 # data.update_database_matches(Cohacze)
@@ -17,16 +14,19 @@ class Cohacze(Enum):
 
 # data.update_database(Cohacze)
 
-games = Games()
+games = GamesList()
 games.get_history_simplified()
-games.sort_games()
+games.filter_games("mapname", filter_by="4p_einhoven_country")
+games.sort_games(sort_by='start_timestamp')
 
 
 
-# print(f"last_game: {Games.last_games}")
+
+
+# print(f"last_game: {GamesList.last_games}")
 
 with open("results.json", "w") as json_file:
-    json.dump(games.last_games, json_file, indent=4)
+    json.dump(games.last_games_filtered, json_file, indent=4)
 
 
 

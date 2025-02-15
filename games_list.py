@@ -4,14 +4,20 @@ from datetime import datetime
 from enums import DatabaseType, Factions
 
 
-class Games:
+class GamesList:
 
     # instance injection for easier testing,
     def __init__(self, load_database_matches = load_database_matches, load_database_profiles = load_database_profiles):
 
         self.load_database_matches = load_database_matches
         self.load_database_profiles = load_database_profiles
-        self.last_games = []
+
+        # use it as a base for filtering games, updated by get_history_simplified
+        self._last_games = []
+
+        # games to display, even if no filtering is aplied
+        self.last_games_filtered = []
+
 
 
     @staticmethod
@@ -28,6 +34,7 @@ class Games:
             'hour': date_time.hour,
             'minute': date_time.minute, 
             }
+
 
 
     @staticmethod
@@ -116,9 +123,9 @@ class Games:
 
 
 
-
-    # add to the existsing list, not reasing
+    # get data from database and create a simplified and easy to read version of game statistics
     def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration, get_players = None, get_match_type = _get_match_type):
+
 
         cohacze_matches = self.load_database_matches()
 
@@ -142,25 +149,66 @@ class Games:
                 simplified_match_stat['team_1'] = self._get_players(match, team=1)
 
 
-            self.last_games.append(simplified_match_stat)
+            self._last_games.append(simplified_match_stat)
             
 
-        # print(f"Game stats: {self.last_games}")
+        # print(f"Game stats: {self._last_games}")
 
-        return self.last_games
+        #
+        self.last_games_filtered = self._last_games
+        return self._last_games
     
     
 
-    def sort_games(self, games=None, sort_by = 'start_timestamp', reverse=True):
+    def sort_games(self, last_games_filtered=None, sort_by='start_timestamp', reverse=True):
 
         print('sorting started')
-        # Use self.last_games if no argument is provided
-        if games is None:
-            games = self.last_games
+        # Use self._last_games if no argument is provided
+        if last_games_filtered is None:
+            last_games_filtered = self.last_games_filtered
         
-        self.last_games = sorted(games, key=lambda x: x.get(sort_by, 0), reverse=reverse)
+
+        self.last_games_filtered = sorted(last_games_filtered, key=lambda x: x.get(sort_by, 0), reverse=reverse)
+
         print("----------\n Sorted")
-        print([game[sort_by] for game in self.last_games])
+        print([game[sort_by] for game in self.last_games_filtered])
 
 
-        return self.last_games
+        return self.last_games_filtered
+    
+
+
+    # filter sub category for filtering nested keys
+    def filter_games(self, filter_category=None, filter_sub_category=None, filter_by=None, get_history_simplified=None):
+        
+        # # call it to actualize _last_games
+        # if get_history_simplified == None:
+        #     self._last_games = self.get_history_simplified()
+        self.last_games_filtered = []
+
+
+        for game in self._last_games:
+
+            if filter_sub_category == None:
+                
+                # if no filter category is provided, then do not perform filtering and return all games
+                if filter_category != None:
+
+                    if game[filter_category] == filter_by:
+                        self.last_games_filtered.append(game)
+                
+
+                else:
+                    self.last_games_filtered = list(self._last_games)
+                
+
+            else:
+                if game[filter_category][filter_sub_category] == filter_by:
+                    self.last_games_filtered.append(game)
+        
+
+        return self.last_games_filtered
+
+
+
+

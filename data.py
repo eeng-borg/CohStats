@@ -36,6 +36,7 @@ def _get_response(player_id):
             json.dump(response_json, json_file, indent=4)  # `indent=4` makes it readable
         
         _request_duration(r_start)
+        
         return response_json
 
     else:
