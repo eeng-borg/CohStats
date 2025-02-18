@@ -32,7 +32,7 @@ def _get_response(player_id):
         response_json = response.json()
 
         # write in file just for visualisation
-        with open("data.json", "w") as json_file:
+        with open("data.json", "w", encoding='utf-8') as json_file:
             json.dump(response_json, json_file, indent=4)  # `indent=4` makes it readable
         
         _request_duration(r_start)
@@ -88,14 +88,13 @@ def _save_database(database, database_type):
 
     file_name = f"database_{database_type}.json"
     # write in file just for visualisation
-    with open(file_name, "w") as json_file:
+    with open(file_name, "w", encoding='utf-8') as json_file:
 
         json.dump(database, json_file, indent=4)  # `indent=4` makes it readable
 
 
 
-# filter out and combine matches of serwer serwer players
-def update_database_matches(players=Cohacze, load_database_matches = load_database_matches, save_database = _save_database, get_response = _get_response, filter_duplicates = _filter_duplicates) -> list:
+def update_database_matches(players=Cohacze, load_database_matches=load_database_matches, save_database=_save_database, get_response=_get_response, filter_duplicates=_filter_duplicates) -> list:
 
     combine_matches = load_database_matches()
 

@@ -2,6 +2,8 @@ import json
 from games_list import GamesList
 from enum import Enum
 import data
+import sys
+import io
 from enums import Cohacze
 
 # match_history = sorted(match_history, key=lambda x: x.get('startgametime', 0), reverse=True)
@@ -12,10 +14,12 @@ from enums import Cohacze
 # data.update_database_matches(Cohacze)
 # data.update_database_profiles(Cohacze)
 
-# data.update_database(Cohacze)
+# sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+# sys.stdout.reconfigure(encoding="utf-8")
+
 
 games = GamesList()
-games.get_history_simplified()
+games.get_history_simplified(do_update_databse=False)
 games.filter_games("mapname", filter_by="4p_einhoven_country")
 games.sort_games(sort_by='start_timestamp')
 

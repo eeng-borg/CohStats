@@ -103,47 +103,54 @@ class GamesList:
 
 
 
-    # return players from on of the team, get their names and faction
-    def _get_players(self, match, team, get_player_name = None, race_id_to_name = _race_id_to_name):
-
-        print(f"get players")
-        players_list = match['matchhistoryreportresults']
-        players_in_team = []
-
-        for player in players_list:
-            if player['teamid'] == team:
-
-                player_dict = {}
-
-                if get_player_name is None:
-                    player_dict['name'] = self._get_player_name(player['profile_id']) # convert id to name
-
-                player_dict['faction'] = race_id_to_name(player['race_id']) # convert id to name
-                players_in_team.append(player_dict)
-        
-
-        return players_in_team
-    
     # # return players from on of the team, get their names and faction
-    # def _get_players(self, match, get_player_name = None, race_id_to_name = _race_id_to_name):
+    # def _get_players(self, match, team, get_player_name = None, race_id_to_name = _race_id_to_name):
 
     #     print(f"get players")
     #     players_list = match['matchhistoryreportresults']
     #     players_in_team = []
 
     #     for player in players_list:
-    #         player_dict = {}
+    #         if player['teamid'] == team:
 
-    #         if get_player_name is None:
-    #             player_dict['name'] = self._get_player_name(player['profile_id']) # convert id to name
+    #             player_dict = {}
 
-    #         player_dict['faction'] = race_id_to_name(player['race_id']) # convert id to name
-    #         player_dict['team'] = player['teamid']
+    #             if get_player_name is None:
+    #                 player_dict['name'] = self._get_player_name(player['profile_id']) # convert id to name
 
-    #         players_in_team.append(player_dict)
+    #             player_dict['faction'] = race_id_to_name(player['race_id']) # convert id to name
+    #             players_in_team.append(player_dict)
         
 
     #     return players_in_team
+    @staticmethod
+    def _sort_players_by_team(players):
+
+        sorted_team = sorted(players, key=lambda x: x['team'])
+        return sorted_team
+    
+
+    
+    # return players from on of the team, get their names and faction
+    def _get_players(self, match, get_player_name=None, race_id_to_name=_race_id_to_name, sort_players_by_team=_sort_players_by_team):
+
+        print(f"get players")
+        players_list = match['matchhistoryreportresults']
+        players_in_team = []
+
+        for player in players_list:
+            player_dict = {}
+
+            if get_player_name is None:
+                player_dict['name'] = self._get_player_name(player['profile_id']) # convert id to name
+
+            player_dict['faction'] = race_id_to_name(player['race_id']) # convert id to name
+            player_dict['team'] = player['teamid']
+
+            players_in_team.append(player_dict)
+        
+
+        return sort_players_by_team(players_in_team)
     
 
 
@@ -160,10 +167,27 @@ class GamesList:
 
 
 
-    # get data from database and create a simplified and easy to read version of game statistics
-    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration, get_players = None, get_match_type = _get_match_type, do_update_databse=True):
+    @staticmethod
+    def _get_match_result(match):
 
-        # update database each time you 
+        player_results = match["matchhistoryreportresults"]
+        
+        for player in player_results:
+
+            # look for the first player who won in that game (1 - won, 0 - lost) and then check his team
+            if player["resulttype"] == 1:
+
+                winning_team = player["teamid"]
+                return winning_team
+
+
+
+
+
+    # get data from database and create a simplified and easy to read version of game statistics
+    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration, get_players = None, get_match_type = _get_match_type, do_update_databse=True, get_match_result=_get_match_result):
+
+
         if do_update_databse == True:
             self.update_database()
         
@@ -183,10 +207,11 @@ class GamesList:
             simplified_match_stat['start_timestamp'] = match['startgametime']
             simplified_match_stat['gameduration'] = get_game_duration(match, 'datetime')
             simplified_match_stat['duration_timestamp'] = get_game_duration(match, 'timestamp')
+            simplified_match_stat['winner_team'] = get_match_result(match)
 
-            if get_players == None:
-                simplified_match_stat['team_0'] = self._get_players(match, team=0)
-                simplified_match_stat['team_1'] = self._get_players(match, team=1)
+            if get_players is None:
+                simplified_match_stat['players'] = self._get_players(match)
+
 
 
             self._last_games.append(simplified_match_stat)
@@ -196,7 +221,7 @@ class GamesList:
 
         #
         self.last_games_filtered = self._last_games
-        print(f"self._last_games: {self._last_games}")
+        # print(f"self._last_games: {self._last_games}")
         return self._last_games
     
     
@@ -260,7 +285,7 @@ class GamesList:
 
 
         for game in self._last_games:
-
+            
             if filter_sub_category == None:
                 
                 # if no filter category is provided, then do not perform filtering and return all games
