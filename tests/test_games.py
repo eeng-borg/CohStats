@@ -226,26 +226,6 @@ def _dummy_database_matches():
                 "xpgained": 13637,
                 "counters": "{\"abil\":6,\"blost\":1,\"bprod\":12,\"cabil\":1,\"cflags\":0,\"cpearn\":17,\"dmgdone\":19019,\"edeaths\":102,\"ekills\":75,\"erein\":63,\"fuelearn\":698,\"fuelmax\":404,\"fuelspnt\":365,\"gt\":1632,\"ismod\":0,\"manearn\":6112,\"manmax\":957,\"manspnt\":6161,\"munearn\":1117,\"munmax\":897,\"munspnt\":220,\"pcap\":11,\"plost\":5,\"popmax\":0,\"precap\":5,\"sqkilled\":9,\"sqlost\":11,\"sqprod\":17,\"svetrank\":2,\"svetxp\":2160,\"upg\":10,\"utypes\":13,\"vabnd\":0,\"vcap\":0,\"version\":3,\"vkill\":3,\"vlost\":6,\"vp0\":0,\"vp1\":416,\"vprod\":7,\"vvetrank\":14,\"vvetxp\":8820,\"wpnpu\":0}",
                 "matchstartdate": 1738613003
-            },
-            {
-                "matchhistory_id": 383842535,
-                "profile_id": 5850752,
-                "resulttype": 0,
-                "teamid": 0,
-                "race_id": 1,
-                "xpgained": 9574,
-                "counters": "{\"abil\":83,\"blost\":3,\"bprod\":17,\"cabil\":1,\"cflags\":0,\"cpearn\":12,\"dmgdone\":13914,\"edeaths\":90,\"ekills\":40,\"erein\":63,\"fuelearn\":595,\"fuelmax\":255,\"fuelspnt\":580,\"gt\":1632,\"ismod\":0,\"manearn\":6289,\"manmax\":1177,\"manspnt\":6547,\"munearn\":980,\"munmax\":382,\"munspnt\":636,\"pcap\":3,\"plost\":1,\"popmax\":0,\"precap\":3,\"sqkilled\":2,\"sqlost\":4,\"sqprod\":16,\"svetrank\":3,\"svetxp\":3040,\"upg\":7,\"utypes\":7,\"vabnd\":0,\"vcap\":0,\"version\":3,\"vkill\":1,\"vlost\":2,\"vp0\":0,\"vp1\":416,\"vprod\":7,\"vvetrank\":12,\"vvetxp\":5200,\"wpnpu\":0}",
-                "matchstartdate": 1738613003
-            },
-            {
-                "matchhistory_id": 383842535,
-                "profile_id": 5975627,
-                "resulttype": 1,
-                "teamid": 1,
-                "race_id": 3,
-                "xpgained": 11855,
-                "counters": "{\"abil\":58,\"blost\":1,\"bprod\":17,\"cabil\":5,\"cflags\":0,\"cpearn\":15,\"dmgdone\":12135,\"edeaths\":80,\"ekills\":105,\"erein\":74,\"fuelearn\":698,\"fuelmax\":266,\"fuelspnt\":515,\"gt\":1632,\"ismod\":0,\"manearn\":5878,\"manmax\":971,\"manspnt\":5725,\"munearn\":1117,\"munmax\":265,\"munspnt\":955,\"pcap\":9,\"plost\":6,\"popmax\":0,\"precap\":6,\"sqkilled\":6,\"sqlost\":3,\"sqprod\":12,\"svetrank\":2,\"svetxp\":1410,\"upg\":7,\"utypes\":15,\"vabnd\":0,\"vcap\":3,\"version\":3,\"vkill\":4,\"vlost\":2,\"vp0\":0,\"vp1\":416,\"vprod\":4,\"vvetrank\":11,\"vvetxp\":6160,\"wpnpu\":10}",
-                "matchstartdate": 1738613003
             }
         ],
         "matchhistorymember": [
@@ -307,36 +287,6 @@ def _dummy_database_matches():
                 "outcome": 0,
                 "oldrating": 1267,
                 "newrating": 1252,
-                "reporttype": 1
-            },
-            {
-                "matchhistory_id": 383842535,
-                "profile_id": 4540940,
-                "race_id": 0,
-                "statgroup_id": 6824297,
-                "teamid": 0,
-                "wins": 8,
-                "losses": 5,
-                "streak": -1,
-                "arbitration": 1,
-                "outcome": 0,
-                "oldrating": 1117,
-                "newrating": 1090,
-                "reporttype": 1
-            },
-            {
-                "matchhistory_id": 383842535,
-                "profile_id": 5850752,
-                "race_id": 1,
-                "statgroup_id": 8636562,
-                "teamid": 0,
-                "wins": 50,
-                "losses": 64,
-                "streak": -2,
-                "arbitration": 1,
-                "outcome": 0,
-                "oldrating": 885,
-                "newrating": 870,
                 "reporttype": 1
             }
         ]
@@ -728,6 +678,13 @@ def test_datetime_duration(mock_games: GamesList):
     result = mock_games._get_game_duration(match, 'datetime')
     assert result == {"hours": 0, "minutes": 24}
 
+
+
+
+
+
+
+
 class TestSorting:
 
     @pytest.fixture
@@ -742,7 +699,7 @@ class TestSorting:
 
     def test_sorting_reversed(self, mock_games: GamesList, last_games):        
 
-        mock_games.sort_games(last_games)
+        mock_games.sort_games(last_games, sort_by='start_timestamp')
 
         assert mock_games.last_games_filtered[0]["start_timestamp"] == 1738782821
         assert mock_games.last_games_filtered[1]["start_timestamp"] == 1738354960
@@ -752,11 +709,12 @@ class TestSorting:
 
     def test_sorting_not_reversed(self, mock_games: GamesList, last_games):        
 
-        mock_games.sort_games(last_games, reverse=False)
+        mock_games.sort_games(last_games, sort_by='start_timestamp', reverse=False)
 
         assert mock_games.last_games_filtered[0]["start_timestamp"] == 1734892194
         assert mock_games.last_games_filtered[1]["start_timestamp"] == 1738354960
         assert mock_games.last_games_filtered[2]["start_timestamp"] == 1738782821
+
 
 
 
@@ -767,6 +725,23 @@ class TestSorting:
         assert mock_games.last_games_filtered[0]["mapname"] == "wolfheze"
         assert mock_games.last_games_filtered[1]["mapname"] == "6p_foy"
         assert mock_games.last_games_filtered[2]["mapname"] == "4p_belgorod"
+        assert mock_games.saved__sort_by == "mapname"
+
+
+
+    def test_sorting_reversed_saved(self, mock_games: GamesList, last_games):        
+
+        mock_games.saved__sort_by = 'start_timestamp'
+
+        mock_games.sort_games(last_games)
+
+        assert mock_games.last_games_filtered[0]["start_timestamp"] == 1738782821
+        assert mock_games.last_games_filtered[1]["start_timestamp"] == 1738354960
+        assert mock_games.last_games_filtered[2]["start_timestamp"] == 1734892194
+
+
+
+
 
 
 
@@ -822,11 +797,16 @@ def test_convert_time(mock_games):
 
 class TestGetHistorySimplified:
 
-    def test_lenght(self, mock_games):
-        
-        mock_games.get_history_simplified()
+    def dummy_get_response(self, player_id):
+        pass
 
-        last_games = mock_games._last_games
+
+    def test_lenght(self, mock_games, monkeypatch: pytest.MonkeyPatch):
+
+        # monkeypatch.setattr(data, "_get_response", self.dummy_get_response)
+        
+        last_games = mock_games.get_history_simplified(do_update_databse=False)
+
 
         assert len(last_games) == 4
 
@@ -846,6 +826,7 @@ def test_get_player_name(mock_games, player_id, alias):
 
 
 class TestGetPlayers:
+
     @pytest.fixture
     def match_members(self):
         return {
@@ -956,18 +937,46 @@ class TestFilterGames:
 
     def test_filter_games(self, mock_games: GamesList):
 
-        mock_games.get_history_simplified()
-        mock_games.filter_games("gametype", filter_by="Automatch")
+        mock_games.get_history_simplified(do_update_databse=False)
+        mock_games.filter_games(filter_category="gametype", filter_by="Automatch")
 
         assert len(mock_games.last_games_filtered) == 3
 
 
 
     def test_filter_games_nested(self, mock_games: GamesList):
-            mock_games.get_history_simplified()
-            mock_games.filter_games("startgametime", "year", filter_by=2024) #Kamil9132
+        
+        mock_games.get_history_simplified(do_update_databse=False)
+        mock_games.filter_games(filter_category="startgametime", filter_sub_category="year", filter_by=2024) #Kamil9132
 
-            assert len(mock_games.last_games_filtered) == 2
+        assert len(mock_games.last_games_filtered) == 2
+
+
+
+    def test_filter_games_saved(self, mock_games: GamesList):
+
+        mock_games.get_history_simplified(do_update_databse=False)
+
+        mock_games.saved__filter_category = "gameformat"
+        mock_games.saved__filter_by = 2
+
+        mock_games.filter_games() #Kamil9132
+
+        assert len(mock_games.last_games_filtered) == 1
+
+
+
+    def test_filter_games_saved_2(self, mock_games: GamesList):
+
+        mock_games.filter_games(filter_category="gameformat", filter_by = 3)
+
+
+        mock_games.get_history_simplified(do_update_databse=False)
+
+
+        mock_games.filter_games() #Kamil9132
+
+        assert len(mock_games.last_games_filtered) == 3
 
 
 

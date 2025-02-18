@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 import time
 
-from enums import DatabaseType
+from enums import Cohacze, DatabaseType
 
 
 
@@ -95,7 +95,7 @@ def _save_database(database, database_type):
 
 
 # filter out and combine matches of serwer serwer players
-def update_database_matches(players, load_database_matches = load_database_matches, save_database = _save_database, get_response = _get_response, filter_duplicates = _filter_duplicates) -> list:
+def update_database_matches(players=Cohacze, load_database_matches = load_database_matches, save_database = _save_database, get_response = _get_response, filter_duplicates = _filter_duplicates) -> list:
 
     combine_matches = load_database_matches()
 
@@ -134,7 +134,7 @@ def load_database_profiles(file_name = "database_profiles.json"):
     
 
 
-def update_database_profiles(players, load_database_profiles = load_database_profiles, get_response = _get_response, save_database = _save_database, filter_duplicates = _filter_duplicates) -> list:
+def update_database_profiles(players = Cohacze, load_database_profiles = load_database_profiles, get_response = _get_response, save_database = _save_database, filter_duplicates = _filter_duplicates) -> list:
 
     combine_profiles = load_database_profiles()
 
@@ -152,7 +152,7 @@ def update_database_profiles(players, load_database_profiles = load_database_pro
 
 # update profiles and matches in the same time 
 def update_database(
-        players, 
+        players = Cohacze,
         update_databse_matches = update_database_matches, 
         update_database_profiles = update_database_profiles, 
         get_response = _get_response,

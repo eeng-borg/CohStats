@@ -1,22 +1,36 @@
-from data import load_database_matches, load_database_profiles
+from data import load_database_matches, load_database_profiles, update_database
 import math
 from datetime import datetime
-from enums import DatabaseType, Factions
+from enums import Cohacze, DatabaseType, Factions
 
 
 class GamesList:
 
     # instance injection for easier testing,
-    def __init__(self, load_database_matches = load_database_matches, load_database_profiles = load_database_profiles):
+    def __init__(self, load_database_matches = load_database_matches, load_database_profiles = load_database_profiles, update_database = update_database):
 
         self.load_database_matches = load_database_matches
         self.load_database_profiles = load_database_profiles
+        self.update_database = update_database
 
         # use it as a base for filtering games, updated by get_history_simplified
         self._last_games = []
 
         # games to display, even if no filtering is aplied
         self.last_games_filtered = []
+
+        # saved options - when database id updated, it return to default sorting order and filtering (random order and no filter)
+        # When sorting func or filtering is called, we save their arguments.
+        # So when database is updated, we can call those functions with saved arguments, to return our list
+        # to the state it was before database update
+
+        self.saved__sort_by = 1739617010
+        self.saved__reversed = True
+
+        self.saved__filter_category = None
+        self.saved__filter_sub_category = None
+        self.saved__filter_by = None
+
 
 
 
@@ -110,6 +124,29 @@ class GamesList:
 
         return players_in_team
     
+    # # return players from on of the team, get their names and faction
+    # def _get_players(self, match, get_player_name = None, race_id_to_name = _race_id_to_name):
+
+    #     print(f"get players")
+    #     players_list = match['matchhistoryreportresults']
+    #     players_in_team = []
+
+    #     for player in players_list:
+    #         player_dict = {}
+
+    #         if get_player_name is None:
+    #             player_dict['name'] = self._get_player_name(player['profile_id']) # convert id to name
+
+    #         player_dict['faction'] = race_id_to_name(player['race_id']) # convert id to name
+    #         player_dict['team'] = player['teamid']
+
+    #         players_in_team.append(player_dict)
+        
+
+    #     return players_in_team
+    
+
+
 
     @staticmethod
     def _get_match_type(description):
@@ -124,9 +161,12 @@ class GamesList:
 
 
     # get data from database and create a simplified and easy to read version of game statistics
-    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration, get_players = None, get_match_type = _get_match_type):
+    def get_history_simplified(self, get_game_format = _get_game_format, convert_time = _convert_time, get_game_duration = _get_game_duration, get_players = None, get_match_type = _get_match_type, do_update_databse=True):
 
-
+        # update database each time you 
+        if do_update_databse == True:
+            self.update_database()
+        
         cohacze_matches = self.load_database_matches()
 
 
@@ -134,8 +174,8 @@ class GamesList:
 
             simplified_match_stat = {}
             
-            simplified_match_stat['id'] = match['id'] 
-            simplified_match_stat['mapname'] = match['mapname']            
+            simplified_match_stat['id'] = match['id']
+            simplified_match_stat['mapname'] = match['mapname']
             simplified_match_stat['gameformat'] = get_game_format(match)
             simplified_match_stat['gametype'] = get_match_type(match['description'])
             simplified_match_stat['startgametime'] = convert_time(match)
@@ -156,11 +196,21 @@ class GamesList:
 
         #
         self.last_games_filtered = self._last_games
+        print(f"self._last_games: {self._last_games}")
         return self._last_games
     
     
 
-    def sort_games(self, last_games_filtered=None, sort_by='start_timestamp', reverse=True):
+
+    def sort_games(self, last_games_filtered=None, sort_by=None, reverse=True):
+
+        if sort_by == None:
+            sort_by = self.saved__sort_by#'start_timestamp'
+
+        else: 
+            self.saved__sort_by = sort_by
+
+
 
         print('sorting started')
         # Use self._last_games if no argument is provided
@@ -170,20 +220,42 @@ class GamesList:
 
         self.last_games_filtered = sorted(last_games_filtered, key=lambda x: x.get(sort_by, 0), reverse=reverse)
 
-        print("----------\n Sorted")
-        print([game[sort_by] for game in self.last_games_filtered])
+        # print("----------\n Sorted")
+        # print([game[sort_by] for game in self.last_games_filtered])
 
 
         return self.last_games_filtered
     
 
 
+
+
     # filter sub category for filtering nested keys
-    def filter_games(self, filter_category=None, filter_sub_category=None, filter_by=None, get_history_simplified=None):
+    def filter_games(self, last_games_to_filter=None, filter_category=None, filter_sub_category=None, filter_by=None):
         
-        # # call it to actualize _last_games
-        # if get_history_simplified == None:
-        #     self._last_games = self.get_history_simplified()
+        # setting default or saved options for filtering - if no arguments are give
+        # if args are given - save them, to use later
+        if filter_category==None:
+            filter_category = self.saved__filter_category
+        else:
+            self.saved__filter_category = filter_category
+
+
+        if filter_sub_category==None:
+            filter_sub_category = self.saved__filter_sub_category
+        else:
+            self.saved__filter_sub_category = filter_sub_category
+
+
+        if filter_by==None:
+            filter_by = self.saved__filter_by
+        else:
+            self.saved__filter_by = filter_by
+
+    
+
+
+
         self.last_games_filtered = []
 
 
